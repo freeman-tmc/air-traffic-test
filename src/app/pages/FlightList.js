@@ -1,6 +1,9 @@
 import React from 'react';
 import getFlights from '../../services/flightService';
-import travel from '../../travel.svg';
+import travel from '../../img/travel.svg';
+import travel_west from '../../img/travel_west.svg';
+import Loader from '../partials/Loader';
+import GeoError from '../partials/GeoError';
 
 
 class FlightList extends React.Component {
@@ -24,10 +27,18 @@ class FlightList extends React.Component {
             const url = `http://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=${latitude}&lng=${longitude}&fDstL=0&fDstU=150`;
             this.collectFlightData(url);
         },
-            () => {
-                this.setState({
-                    geolocationError: true
-                })
+            (error) => {
+            console.log(error.message);
+                if(error.message.includes('User denied')) {
+                    this.setState({
+                        geolocationError: true
+                    })
+                } else {
+                    this.setState({
+                        connectionError: true,
+                    })
+                }
+
             })
 
     }
@@ -43,7 +54,7 @@ class FlightList extends React.Component {
                 this.setState({
                     flights: data.sort(function (a, b) { return b.altitude - a.altitude }),
                     refreshId: setTimeout(() => this.collectFlightData(url), 60000),
-                    loading: false,
+                    loading: false
                 })
             })
             .catch(() => {
@@ -64,12 +75,12 @@ class FlightList extends React.Component {
     render() {
 
         return (
-            <div>
-                {!this.state.geolocationError
-                    ? !this.state.connectionError
+            <React.Fragment>
+                {!this.state.connectionError
+                    ? !this.state.geolocationError
                         ? !this.state.loading
                             ? this.state.flights.length
-                                ? <table>
+                                ? <table className="container centered">
                                         <thead>
                                             <tr>
                                                 <th>Heading</th>
@@ -80,23 +91,20 @@ class FlightList extends React.Component {
                                         <tbody>
                                             {this.state.flights.map((el, index) => {
                                                 return <tr key={index} data={JSON.stringify(el)} onClick={this.handleClick}>
-                                                    <td><img width="50px" src={travel} alt="" /></td>
+                                                    <td className={el.heading}><img width="50px" src={el.heading === 'east' ? travel : travel_west} alt="" /></td>
                                                     <td>{el.altitude}</td>
                                                     <td>{el.flightNumber}</td>
                                                 </tr>
                                             })}
                                         </tbody>
                                     </table>
-                                : <h2>There's no fligts at your location at the moment!</h2>
-                            : <p>Loading...</p>
-                        : <h2>Server error!</h2>
-                    : <div>
-                        <h2>Geolocation is not allowed! Please enable geolocation to continue!</h2>
-                        <a href="http://waziggle.com/BrowserAllow.aspx" target="_blank" rel="noopener noreferrer">How to enable geolocation?</a>
-                      </div>}
-            </div>
+                                : <h2 className="error">There's no fligts at your location at the moment!</h2>
+                            : <Loader />
+                        : <GeoError />
+                    : <h2 className="error">Connection error!</h2>}
+            </React.Fragment>
         )
-    }
+    } 
 }
 
 export default FlightList;

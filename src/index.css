@@ -1,5 +1,118 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  background: url("./img/background.jpg") fixed center;
+  overflow: scroll; }
+
+html, body, #root {
+  height: 100%; }
+
+.main-container {
+  min-height: 100%;
+  margin-bottom: -60px;
+  padding-top: 100px; }
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
+
+#push {
+  height: 60px; }
+
+.west {
+  transform: rotateY(180deg); }
+
+nav.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 80px;
+  background: #123a5a; }
+  nav.navigation a.brand-logo {
+    line-height: 83px; }
+    @media screen and (max-width: 525px) {
+      nav.navigation a.brand-logo {
+        font-size: 1.5em; } }
+    @media screen and (max-width: 380px) {
+      nav.navigation a.brand-logo {
+        font-size: 1.2em; } }
+
+footer {
+  background: #123a5a;
+  height: 60px;
+  text-align: center;
+  box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2); }
+  footer p {
+    line-height: 60px;
+    color: white; }
+
+#loader {
+  width: 35px;
+  margin: 0 auto;
+  margin-top: 120px;
+  position: relative;
+  left: -17px; }
+
+@keyframes fadein {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+table.container {
+  background: rgba(245, 245, 245, 0.43);
+  animation: fadein 0.5s ease-in; }
+  table.container th {
+    font-size: 18px; }
+  table.container td {
+    width: 33.3%;
+    font-size: 16px;
+    font-weight: 600; }
+
+#details-card {
+  animation: fadein 0.5s ease-in;
+  margin-top: 200px;
+  background: none; }
+  #details-card .card-image {
+    background: none; }
+    #details-card .card-image img {
+      width: 100%; }
+  #details-card .card-content {
+    background: none; }
+    #details-card .card-content p {
+      color: #2e2e2e;
+      margin-bottom: 8px; }
+      #details-card .card-content p span {
+        color: black;
+        font-weight: bold; }
+  #details-card .horizontal {
+    background: rgba(245, 245, 245, 0.43); }
+
+.error {
+  width: 60%;
+  margin: 0 auto;
+  font-size: 24px; }
+  .error h2 {
+    font-size: 24px; }
+  .error a {
+    color: darkblue;
+    font-size: 16px; }
+
+#arrow {
+  width: 50px;
+  background: #123a5a;
+  border-radius: 8px;
+  padding: 5px;
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+  display: block; }
+  #arrow img {
+    display: block;
+    width: 30px;
+    margin: 0 auto; }
+
+/*# sourceMappingURL=index.css.map */
