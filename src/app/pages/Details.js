@@ -1,6 +1,9 @@
 import React from 'react';
 import findLogo from '../../services/logoService';
-import defaultLogo from '../../default_logo.png';
+import defaultLogo from '../../img/default_logo.png';
+import Loader from '../partials/Loader';
+import {Link} from 'react-router-dom';
+import arrow from '../../img/left_arrow.svg';
 
 class Details extends React.Component {
     constructor(props) {
@@ -13,7 +16,7 @@ class Details extends React.Component {
     }
 
     componentDidMount() {
-       
+
         let flightData = sessionStorage.getItem('flight');
         if (flightData) {
             let flightDataObject = JSON.parse(flightData);
@@ -44,19 +47,28 @@ class Details extends React.Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {!this.state.loading
-                    ? <div>
-                        <p>Manufacturer: {this.state.flightDetails.manufacturer}</p>
-                        <p>Model: {this.state.flightDetails.model}</p>
-                        <p>Origin: {this.state.flightDetails.origin}</p>
-                        <p>Destination: {this.state.flightDetails.destination}</p>
-                        <p>Company: {this.state.flightDetails.company}</p>
-                        <img src={this.state.companyLogoUrl} alt="" />
+                    ? <div className="row" id="details-card">
+                        <div className="col m6 offset-m3">
+                            <div className="card horizontal">
+                                <div className="card-image">
+                                    <img src={this.state.companyLogoUrl} alt="" />
+                                </div>
+                                <div className="card-content">
+                                    <p>Manufacturer: <span>{this.state.flightDetails.manufacturer}</span></p>
+                                    <p>Model: <span>{this.state.flightDetails.model}</span></p>
+                                    <p>Origin: <span>{this.state.flightDetails.origin}</span></p>
+                                    <p>Destination: <span>{this.state.flightDetails.destination}</span></p>
+                                    <p>Company: <span>{this.state.flightDetails.company}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <Link id="arrow" to="/"><img src={arrow} alt=""/></Link>
                     </div>
-                    : <h2>Loading...</h2>
+                    : <Loader />
                 }
-            </div>
+            </React.Fragment>
         )
     }
 }

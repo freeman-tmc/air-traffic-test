@@ -14,7 +14,7 @@ class App extends Component {
     
         return (
             <React.Fragment>
-                <div id="wrapper">
+                <div className="main-container">
                     <Header />
                     <Switch>
                         <Route exact path="/" component={FlightList} />
