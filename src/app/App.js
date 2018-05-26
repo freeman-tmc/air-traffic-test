@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import './App.css';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Header from './partials/Header';
 import Footer from './partials/Footer';
 import FlightList from './pages/FlightList';
@@ -19,6 +19,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={FlightList} />
                         <Route exact path="/details" component={Details} />
+                        <Redirect from="/" to="/" />
                     </Switch>
                     <div id="push"></div>
                 </div>

@@ -10,8 +10,8 @@ class Flight {
         this.flightNumber = flightData.Icao;
         this.manufacturer = flightData.Man;
         this.model = flightData.Type;
-        this.destination = flightData.To;
-        this.origin = flightData.From;
+        this.destination = flightData.To || 'no data';
+        this.origin = flightData.From || 'no data';
         this.heading = getHeading(flightData.Trak);
         this.company = flightData.Op;
     }
