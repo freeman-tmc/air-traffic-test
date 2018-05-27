@@ -22,29 +22,25 @@ class FlightList extends React.Component {
     componentDidMount() {
 
         navigator.geolocation.getCurrentPosition(position => {
+
             let latitude = position.coords.latitude;
             let longitude = position.coords.longitude;
             const url = `http://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=${latitude}&lng=${longitude}&fDstL=0&fDstU=150`;
             this.collectFlightData(url);
-        },
-            (error) => {
-            console.log(error.message);
-                if(error.message.includes('User denied')) {
-                    this.setState({
-                        geolocationError: true
-                    })
-                } else {
-                    this.setState({
-                        connectionError: true,
-                    })
-                }
+        }, (error) => {
+            // checks if it's connection error or 
+            // user denied geolocation
+            if(error.message.includes('User denied')) {
+                this.setState({
+                    geolocationError: true
+                })
+            } else {
+                this.setState({
+                    connectionError: true
+                })
+            }
+        })
 
-            })
-
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.state.refreshId);
     }
 
     collectFlightData = (url) => {
@@ -70,6 +66,10 @@ class FlightList extends React.Component {
         let flightData = event.currentTarget.getAttribute('data');
         sessionStorage.setItem('flight', flightData);
         this.props.history.push("/details");
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.refreshId);
     }
 
     render() {

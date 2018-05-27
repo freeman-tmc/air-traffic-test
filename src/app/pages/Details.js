@@ -5,6 +5,7 @@ import Loader from '../partials/Loader';
 import {Link} from 'react-router-dom';
 import arrow from '../../img/left_arrow.svg';
 
+
 class Details extends React.Component {
     constructor(props) {
         super(props);
@@ -18,6 +19,7 @@ class Details extends React.Component {
     componentDidMount() {
 
         let flightData = sessionStorage.getItem('flight');
+
         if (flightData) {
             let flightDataObject = JSON.parse(flightData);
             let company = flightDataObject.company;
@@ -41,6 +43,7 @@ class Details extends React.Component {
                     })
                 })
         } else {
+            // redirectio to "/" if user manually entered url
             this.props.history.push('/');
         }
     }

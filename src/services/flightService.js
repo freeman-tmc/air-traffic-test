@@ -2,7 +2,6 @@ import Flight from "../entities/flight";
 import fetchJsonp from 'fetch-jsonp';
 
 
-
 const getFlights = (url) => {
 
     return fetchJsonp(url)

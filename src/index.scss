@@ -96,22 +96,15 @@ table.container {
 #details-card {
     animation: fadein 0.5s ease-in;
     margin-top: 200px;
-    // max-width: 800px;
     background: none;
     .card-image {
         background: none;
-    //     min-height: 200px;
-        // width: 40%;
         img {
             width: 100%;
         }
-    //     // margin: 0 auto;
-    //     // height: 100%;
     }
     .card-content {
         background: none;
-    //     min-height: 200px;
-        // width: 60%;
         p {
             color: rgb(46, 46, 46);
             margin-bottom: 8px;

@@ -1,5 +1,4 @@
 
-
 const findLogo = (company) => {
     return fetch(`https://autocomplete.clearbit.com/v1/companies/suggest?query=${company}`)
     .then(data => {
@@ -9,9 +8,6 @@ const findLogo = (company) => {
         if(data.length) {
             return data[0].logo;
         } 
-        // else {
-        //     throw new Error('no logo');
-        // }
     })
 }
 

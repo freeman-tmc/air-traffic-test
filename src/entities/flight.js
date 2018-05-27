@@ -1,5 +1,4 @@
 
-
 const getHeading = (angle) => {
     return angle > 180 ? 'west' : 'east';
 }
